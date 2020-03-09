@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Product from '../../components/Product'
 
-export default class ProductsPage extends Component {
+export default class Products extends Component {
   state = {
     products: []
   }

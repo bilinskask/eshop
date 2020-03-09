@@ -1,0 +1,22 @@
+.navContainer {
+  padding: 25px 0;
+}
+
+.link {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.link ~ .link {
+  margin-left: 1rem;
+}
+
+.bigLink {
+  font-size: 2rem;
+  color: blueviolet;
+  font-weight: bold;
+  font-family: Georgia;
+  text-decoration: none;
+}
