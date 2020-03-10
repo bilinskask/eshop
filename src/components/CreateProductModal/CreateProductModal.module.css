@@ -1,0 +1,23 @@
+.formControl {
+  max-width: 30%;
+  margin: 0 auto;
+}
+.formControl ~ .formControl {
+  margin-top: 2rem;
+}
+.formControl label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.formControl input,
+.formControl textarea {
+  width: 100%;
+}
+.heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.buttonList {
+  margin-top: 2rem;
+}
