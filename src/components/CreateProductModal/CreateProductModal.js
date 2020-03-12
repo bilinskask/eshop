@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import classes from './CreateProductModal.module.css'
 import { random } from 'faker'
@@ -8,15 +8,17 @@ import axios from 'axios'
 //close modal on cancel
 //show success message and clear input fields
 
+const emptyObject = () => ({
+  id: random.uuid(),
+  name: '',
+  description: '',
+  price: 0,
+  quantity: 0,
+  image: `https://picsum.photos/id/${random.number(200) || 1}/600`
+})
+
 export const CreateProductModal = ({ isModalOpen, toggleModal }) => {
-  const [formState, setFormState] = useState({
-    id: random.uuid(),
-    name: '',
-    description: '',
-    price: 0,
-    quantity: 0,
-    image: `https://picsum.photos/id/${random.number(200) || 1}/600`
-  })
+  const [formState, setFormState] = useState(emptyObject())
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
 
@@ -43,7 +45,6 @@ export const CreateProductModal = ({ isModalOpen, toggleModal }) => {
       isFormValid = false
       errors.price = 'Price is required'
     }
-    console.log(errors)
     setErrors(errors)
     return isFormValid
   }
@@ -53,12 +54,6 @@ export const CreateProductModal = ({ isModalOpen, toggleModal }) => {
     const quantity = numberQuantity <= 0 ? 0 : numberQuantity
     setFormState({ ...formState, quantity })
   }
-
-  // const priceChangeHandler = event => {
-  //   const priceNumber = Number(event.target.value)
-  //   const price = priceNumber.toFixed(2)
-  //   setFormState({ ...formState, price })
-  // }
 
   const inputChangeHandler = (formStateKey, event) => {
     setFormState({
@@ -82,15 +77,13 @@ export const CreateProductModal = ({ isModalOpen, toggleModal }) => {
   }
 
   const resetForm = () => {
-    setFormState({
-      ...formState,
-      name: '',
-      description: '',
-      price: 0,
-      quantity: ''
-    })
+    setFormState(emptyObject())
     setSuccess(false)
   }
+
+  useEffect(() => {
+    resetForm()
+  }, [isModalOpen])
 
   return (
     <Modal
