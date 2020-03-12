@@ -20,6 +20,12 @@ export default class Products extends Component {
     fetchProducts()
   }
 
+  addNewProduct = newProduct => {
+    this.setState({
+      products: [...this.state.products, newProduct]
+    })
+  }
+
   toggleModalHandler = () =>
     this.setState(prevState => ({
       isModalOpen: !prevState.isModalOpen
@@ -40,6 +46,7 @@ export default class Products extends Component {
         <CreateProductModal
           isModalOpen={isModalOpen}
           toggleModal={this.toggleModalHandler}
+          addNewProduct={this.addNewProduct}
         />
       </>
     )

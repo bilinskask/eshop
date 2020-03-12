@@ -17,7 +17,11 @@ const emptyObject = () => ({
   image: `https://picsum.photos/id/${random.number(200) || 1}/600`
 })
 
-export const CreateProductModal = ({ isModalOpen, toggleModal }) => {
+export const CreateProductModal = ({
+  isModalOpen,
+  toggleModal,
+  addNewProduct
+}) => {
   const [formState, setFormState] = useState(emptyObject())
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(false)
@@ -72,7 +76,10 @@ export const CreateProductModal = ({ isModalOpen, toggleModal }) => {
       const response = await axios.post('http://localhost:4000/products', {
         ...formStateCopy
       })
-      response.status === 201 && setSuccess(true)
+      if (response.status === 201) {
+        setSuccess(true)
+        addNewProduct(response.data)
+      }
     }
   }
 
